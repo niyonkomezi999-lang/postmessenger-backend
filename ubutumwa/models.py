@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings 
+from django.contrib.auth.models import User
 
 class MessagePublie(models.Model):
     contenu = models.TextField()
@@ -22,10 +23,6 @@ class Follow(models.Model):
 
     def __str__(self):
         return f"{self.abonne.username} suit {self.gagnant.username}"
-
-from django.contrib.auth.models import User
-from django.db import models
-
 
 class Like(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

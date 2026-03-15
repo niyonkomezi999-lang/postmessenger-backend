@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import  MessagePublie, Follow 
+from .models import  *
 
 
 class FollowAdmin(admin.ModelAdmin):
@@ -18,3 +18,19 @@ class MessagePublieAdmin(admin.ModelAdmin):
     def contenu_court(self, obj):
         return obj.contenu[:50]
     contenu_court.short_description = 'Extrait du message'
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post', 'date_created', 'contenu_court')
+    list_filter = ('date_created', 'post')
+    ordering = ['-date_created']
+
+    def contenu_court(self, obj):
+        return obj.contenu[:50]
+    contenu_court.short_description = 'Extrait du commentaire'
+
+@admin.register(Like)
+class LikeAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post', 'date_created')
+    list_filter = ('date_created', 'post')
+    ordering = ['-date_created']
